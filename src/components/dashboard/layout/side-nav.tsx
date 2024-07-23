@@ -50,65 +50,40 @@ export function SideNav(): React.JSX.Element {
         '&::-webkit-scrollbar': { display: 'none' },
       }}
     >
-      <Stack spacing={2} sx={{ p: 3 }}>
+      <Stack spacing={0} sx={{ p: '19px' }}>
         <Box component={RouterLink} href={paths.home} sx={{ display: 'inline-flex' }}>
-          <Logo color="light" height={32} width={122} />
+          <Logo color="light" height={240} width={240} />
         </Box>
-        <Box
-          sx={{
-            alignItems: 'center',
-            backgroundColor: 'var(--mui-palette-neutral-950)',
-            border: '1px solid var(--mui-palette-neutral-700)',
-            borderRadius: '12px',
-            cursor: 'pointer',
-            display: 'flex',
-            p: '4px 12px',
-          }}
-        >
-          <Box sx={{ flex: '1 1 auto' }}>
-            <Typography color="var(--mui-palette-neutral-400)" variant="body2">
-              Workspace
-            </Typography>
-            <Typography color="inherit" variant="subtitle1">
-              Devias
-            </Typography>
-          </Box>
-          <CaretUpDownIcon />
-        </Box>
+        <Typography 
+          color="var(--mui-palette-neutral-100)" 
+          variant="h5"
+          sx={{textAlign: 'center'}}
+          >
+            Medal Tracker
+          </Typography>
       </Stack>
       <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
       <Box component="nav" sx={{ flex: '1 1 auto', p: '12px' }}>
         {renderNavItems({ pathname, items: navItems })}
       </Box>
       <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
-      <Stack spacing={2} sx={{ p: '12px' }}>
+      <Stack spacing={3} sx={{ p: '40px' }}>
         <div>
-          <Typography color="var(--mui-palette-neutral-100)" variant="subtitle2">
-            Need more features?
-          </Typography>
-          <Typography color="var(--mui-palette-neutral-400)" variant="body2">
-            Check out our Pro solution template.
+          <Typography 
+            color="var(--mui-palette-neutral-100)" 
+            variant="subtitle1"
+            sx={{textAlign:'center'}}>
+            Powered by
           </Typography>
         </div>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Box
             component="img"
             alt="Pro version"
-            src="/assets/devias-kit-pro.png"
+            src="/assets/explo.png"
             sx={{ height: 'auto', width: '160px' }}
           />
         </Box>
-        <Button
-          component="a"
-          endIcon={<ArrowSquareUpRightIcon fontSize="var(--icon-fontSize-md)" />}
-          fullWidth
-          href="https://material-kit-pro-react.devias.io/"
-          sx={{ mt: 2 }}
-          target="_blank"
-          variant="contained"
-        >
-          Pro version
-        </Button>
       </Stack>
     </Box>
   );
@@ -116,9 +91,7 @@ export function SideNav(): React.JSX.Element {
 
 function renderNavItems({ items = [], pathname }: { items?: NavItemConfig[]; pathname: string }): React.JSX.Element {
   const children = items.reduce((acc: React.ReactNode[], curr: NavItemConfig): React.ReactNode[] => {
-    const { key, ...item } = curr;
-
-    acc.push(<NavItem key={key} pathname={pathname} {...item} />);
+    acc.push(<NavItem key={curr.key} pathname={pathname} item={curr} />);
 
     return acc;
   }, []);
@@ -130,13 +103,20 @@ function renderNavItems({ items = [], pathname }: { items?: NavItemConfig[]; pat
   );
 }
 
-interface NavItemProps extends Omit<NavItemConfig, 'items'> {
+interface NavItemProps {
   pathname: string;
+  item: NavItemConfig;
 }
 
-function NavItem({ disabled, external, href, icon, matcher, pathname, title }: NavItemProps): React.JSX.Element {
+function NavItem({ pathname, item }: NavItemProps): React.JSX.Element {
+  const { key, disabled, external, href, icon, matcher, title, items } = item;
+  const [isExpanded, setIsExpanded] = React.useState(false);
   const active = isNavItemActive({ disabled, external, href, matcher, pathname });
   const Icon = icon ? navIcons[icon] : null;
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
     <li>
@@ -148,7 +128,7 @@ function NavItem({ disabled, external, href, icon, matcher, pathname, title }: N
               target: external ? '_blank' : undefined,
               rel: external ? 'noreferrer' : undefined,
             }
-          : { role: 'button' })}
+          : { role: 'button', onClick: handleToggle })}
         sx={{
           alignItems: 'center',
           borderRadius: 1,
@@ -169,7 +149,7 @@ function NavItem({ disabled, external, href, icon, matcher, pathname, title }: N
           ...(active && { bgcolor: 'var(--NavItem-active-background)', color: 'var(--NavItem-active-color)' }),
         }}
       >
-        <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto' }}>
+        <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto', transition: 'transform 0.3s', transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>
           {Icon ? (
             <Icon
               fill={active ? 'var(--NavItem-icon-active-color)' : 'var(--NavItem-icon-color)'}
@@ -186,7 +166,19 @@ function NavItem({ disabled, external, href, icon, matcher, pathname, title }: N
             {title}
           </Typography>
         </Box>
+        {items?.length ? (
+          <Box sx={{ ml: 'auto', transition: 'transform 0.3s', transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+            <CaretUpDownIcon onClick={handleToggle} />
+          </Box>
+        ) : null}
       </Box>
+      {isExpanded && items?.length ? (
+        <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0, pl: 2 }}>
+          {items.map((subItem) => (
+            <NavItem key={subItem.key} pathname={pathname} item={subItem} />
+          ))}
+        </Box>
+      ) : null}
     </li>
   );
 }
