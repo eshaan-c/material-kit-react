@@ -109,8 +109,10 @@ interface NavItemProps {
 }
 
 function NavItem({ pathname, item }: NavItemProps): React.JSX.Element {
-  const { key, disabled, external, href, icon, matcher, title, items } = item;
+  const { disabled, external, href, icon, matcher, title, items } = item;
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const contentRef = React.useRef<HTMLUListElement>(null);
+
   const active = isNavItemActive({ disabled, external, href, matcher, pathname });
   const Icon = icon ? navIcons[icon] : null;
 
@@ -149,7 +151,7 @@ function NavItem({ pathname, item }: NavItemProps): React.JSX.Element {
           ...(active && { bgcolor: 'var(--NavItem-active-background)', color: 'var(--NavItem-active-color)' }),
         }}
       >
-        <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto', transition: 'transform 0.3s', transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+        <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flex: '0 0 auto' }}>
           {Icon ? (
             <Icon
               fill={active ? 'var(--NavItem-icon-active-color)' : 'var(--NavItem-icon-color)'}
@@ -172,13 +174,23 @@ function NavItem({ pathname, item }: NavItemProps): React.JSX.Element {
           </Box>
         ) : null}
       </Box>
-      {isExpanded && items?.length ? (
-        <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0, pl: 2 }}>
-          {items.map((subItem) => (
-            <NavItem key={subItem.key} pathname={pathname} item={subItem} />
-          ))}
-        </Box>
-      ) : null}
+      <Box
+        component="ul"
+        ref={contentRef}
+        sx={{
+          listStyle: 'none',
+          m: 0,
+          p: 0,
+          pl: 2,
+          maxHeight: isExpanded ? `${contentRef.current?.scrollHeight}px` : 0,
+          overflow: 'hidden',
+          transition: 'max-height 0.3s ease',
+        }}
+      >
+        {items?.length && items.map((subItem) => (
+          <NavItem key={subItem.key} pathname={pathname} item={subItem} />
+        ))}
+      </Box>
     </li>
   );
 }

@@ -10,8 +10,8 @@ export default function Page(): React.JSX.Element {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <iframe
-          src="https://app.explo.co/iframe/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiZmY1OTg2OTMtMjlkNy00ZTkyLWI3YzQtOTBiNTFiZjkyYmVkIn0..v8FUThYblx2eN4qmrIDTVQ.mleCnDPOGCz-GoYWkghwsyUTIeXYHh8GmdphgeWcAEP_zdwYxzt9AF5XnZRN3SuYHHEYdrDiiZzsKc4cxM5Jow.9cKrSWwAm55WKB974BHC5g"
-          style={{ width: '100%', border: 'none', height: '120vh' }}
+          src="https://app.explo.co/iframe/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiZmY1OTg2OTMtMjlkNy00ZTkyLWI3YzQtOTBiNTFiZjkyYmVkIn0..rBG2RDc8Xa34AE5MlO9q8Q.kFjy_pj0D5QszBcNqKID2bmOg-iITXl-RXk4i_PjwYIY8fBruaOK77-HLwINaY0PD8yG51xZqt5S0gWJF2K9kg.3nB42PqsebN1df8a220qpQ"
+          style={{ width: '100%', border: 'none', height: '100vh' }}
           title="Embedded Dashboard"
         ></iframe>
       </Grid>
