@@ -1,5 +1,5 @@
 export const paths = {
-  home: '/dashboard/live',
+  home: '/dashboard',
   auth: { signIn: '/auth/sign-in', signUp: '/auth/sign-up', resetPassword: '/auth/reset-password' },
   dashboard: {
     historical: '/dashboard',

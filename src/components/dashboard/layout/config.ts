@@ -2,8 +2,8 @@ import type { NavItemConfig } from '@/types/nav';
 import { paths } from '@/paths';
 
 export const navItems = [
-  { key: 'live', title: 'Live Medals', href: paths.dashboard.live, icon: 'medals' },
   { key: 'historical', title: 'Historical Data', href: paths.dashboard.historical, icon: 'past' },
+  { key: 'live', title: 'Live Medals', href: paths.dashboard.live, icon: 'medals' },
   {
     key: 'individual', 
     title: 'Individual Sports', 
