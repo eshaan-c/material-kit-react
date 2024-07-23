@@ -10,10 +10,6 @@ export const paths = {
     basketballwomens: '/dashboard/live/basketball/womens',
     athletics: '/dashboard/live/athletics',
     swimming: '/dashboard/live/swimming',
-    account: '/dashboard/account',
-    customers: '/dashboard/customers',
-    integrations: '/dashboard/integrations',
-    settings: '/dashboard/settings',
   },
   errors: { notFound: '/errors/not-found' },
 } as const;

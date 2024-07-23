@@ -66,6 +66,18 @@ export function SideNav(): React.JSX.Element {
       <Box component="nav" sx={{ flex: '1 1 auto', p: '12px' }}>
         {renderNavItems({ pathname, items: navItems })}
       </Box>
+      <Box>
+      <iframe
+        src="https://explo-website-tools.web.app/twitter-embed"
+        style={{
+          width: '100%',
+          height: '40vh',
+          transform: 'scale(0.9)', // Scale down to 80%
+          border: 'none',
+          borderRadius: '7px',
+        }}
+      ></iframe>
+    </Box>
       <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
       <Stack spacing={3} sx={{ p: '40px' }}>
         <div>

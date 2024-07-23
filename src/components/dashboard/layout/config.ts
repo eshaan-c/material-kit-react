@@ -7,7 +7,6 @@ export const navItems = [
   {
     key: 'individual', 
     title: 'Individual Sports', 
-    // href: paths.dashboard.live, 
     icon: 'user',
     items: [
       { key: 'athletics', title: "Athletics", href: paths.dashboard.athletics, icon: 'runner' },
@@ -17,7 +16,6 @@ export const navItems = [
   {
     key: 'teams', 
     title: 'Team Sports', 
-    // href: paths.dashboard.live, 
     icon: 'users',
     items: [
       { key: 'soccermen', title: "Men's Soccer", href: paths.dashboard.soccermens, icon: 'soccer' },
@@ -26,9 +24,4 @@ export const navItems = [
       { key: 'basketballwomen', title: "Women's Basketball", href: paths.dashboard.basketballwomens, icon: 'basketball' }
     ]
   },
-  { key: 'settings', title: 'Settings', href: paths.dashboard.settings, icon: 'gear-six' },
-  // { key: 'customers', title: 'Customers', href: paths.dashboard.customers, icon: 'users' },
-  // { key: 'integrations', title: 'Integrations', href: paths.dashboard.integrations, icon: 'plugs-connected' },
-  // { key: 'account', title: 'Account', href: paths.dashboard.account, icon: 'user' },
-  // { key: 'error', title: 'Error', href: paths.errors.notFound, icon: 'x-square' },
 ] satisfies NavItemConfig[];
