@@ -11,7 +11,7 @@ export default function Page(): React.JSX.Element {
       <Grid item xs={12}>
         <iframe
           src="https://app.explo.co/iframe/eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiZmY1OTg2OTMtMjlkNy00ZTkyLWI3YzQtOTBiNTFiZjkyYmVkIn0..MZn6h-dfE7gIlKomg5HvWg.oYYPw6w_ETBm_AkrPO4-LjcNOY0A-ekoJ405_qx-cZRuBzQ0m_G4k9XdCKtKig2rqtLHBgDFUeRpFgVvskdo.ySkymCDODktXyPJKY-OyYA"
-          style={{ width: '100%', border: 'none', height: '100vh' }}
+          style={{ width: '100%', border: 'none', height: '200vh' }}
           title="Embedded Dashboard"
         ></iframe>
       </Grid>
